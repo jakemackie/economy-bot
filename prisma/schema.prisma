@@ -12,4 +12,5 @@ model User {
   username      String
   displayName   String
   balance       Int       @default(0)
+  lastWorkedAt  DateTime?
 }

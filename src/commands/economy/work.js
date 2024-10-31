@@ -15,17 +15,26 @@ module.exports = {
       },
     });
 
+    // Check if user has worked in the last 24 hours
+    if (user.lastWorkedAt > new Date(Date.now() - 86400000)) {
+      return interaction.reply({
+        content: "You can only work once every 24 hours.",
+        ephemeral: true,
+      });
+    }
+
     await prisma.user.update({
       where: {
         id: interaction.user.id,
       },
       data: {
-        balance: user.balance + 100,
+        balance: user.balance + 75,
+        lastWorkedAt: new Date(),
       },
     });
 
     interaction.reply({
-      content: "You went to work and earned :moneybag: $100.",
+      content: "You went to work and earned :moneybag: $75.",
     });
   },
 };
