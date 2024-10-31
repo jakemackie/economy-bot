@@ -4,7 +4,7 @@ module.exports = {
   name: "users",
   description: "See all registered users.",
   // deleted: true,
-  devOnly: true,
+  // devOnly: true,
   testOnly: true,
   // ? option: Object[] - see docs for more info
 
@@ -18,7 +18,6 @@ module.exports = {
 
     interaction.reply({
       content: `${usersList.join(", ")}`,
-      ephemeral: true,
     });
   },
 };

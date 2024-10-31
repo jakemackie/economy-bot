@@ -4,7 +4,7 @@ module.exports = {
   name: "work",
   description: "Go to your boring 9-5 and earn some money.",
   // deleted: true,
-  devOnly: true,
+  // devOnly: true,
   testOnly: true,
   // ? option: Object[] - see docs for more info
 
@@ -26,7 +26,6 @@ module.exports = {
 
     interaction.reply({
       content: "You went to work and earned :moneybag: $100.",
-      ephemeral: true,
     });
   },
 };

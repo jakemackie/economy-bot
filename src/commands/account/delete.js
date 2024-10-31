@@ -4,7 +4,7 @@ module.exports = {
   name: "delete",
   description: `Delete the account you've registered.`,
   // deleted: true,
-  devOnly: true,
+  // devOnly: true,
   testOnly: true,
   // ? option: Object[] - see docs for more info
 
@@ -16,7 +16,6 @@ module.exports = {
     if (!userIds.includes(interaction.user.id)) {
       interaction.reply({
         content: "You aren't registered.",
-        ephemeral: true,
       });
       return;
     }
@@ -29,7 +28,6 @@ module.exports = {
 
     interaction.reply({
       content: "You have deleted your account.",
-      ephemeral: true,
     });
   },
 };

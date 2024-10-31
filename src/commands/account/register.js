@@ -4,7 +4,7 @@ module.exports = {
   name: "register",
   description: "Register an account using your public Discord profile data.",
   // deleted: true,
-  devOnly: true,
+  // devOnly: true,
   testOnly: true,
   // ? option: Object[] - see docs for more info
 
@@ -16,7 +16,6 @@ module.exports = {
     if (userIds.includes(interaction.user.id)) {
       interaction.reply({
         content: "You are already registered.",
-        ephemeral: true,
       });
       return;
     }
@@ -31,7 +30,6 @@ module.exports = {
 
     interaction.reply({
       content: "You have successfully registered.",
-      ephemeral: true,
     });
   },
 };

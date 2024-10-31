@@ -23,7 +23,6 @@ module.exports = async (client, interaction) => {
         content: commandObject.devOnly
           ? "Only developers are allowed to run this command."
           : "This command cannot be ran here.",
-        ephemeral: true,
       });
       return;
     }
@@ -35,7 +34,6 @@ module.exports = async (client, interaction) => {
     ) {
       interaction.reply({
         content: "Not enough permissions.",
-        ephemeral: true,
       });
       return;
     }
@@ -48,7 +46,6 @@ module.exports = async (client, interaction) => {
     ) {
       interaction.reply({
         content: "I don't have enough permissions.",
-        ephemeral: true,
       });
       return;
     }
@@ -69,7 +66,6 @@ module.exports = async (client, interaction) => {
         );
       await interaction.reply({
         embeds: [unregisteredEmbed],
-        ephemeral: true,
       });
       return;
     }
