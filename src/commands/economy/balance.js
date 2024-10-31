@@ -21,7 +21,7 @@ module.exports = {
     if (targetUser) {
       const user = await prisma.user.findUnique({
         where: {
-          id: user.id,
+          id: targetUser.id,
         },
       });
 
