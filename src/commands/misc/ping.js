@@ -2,7 +2,7 @@ module.exports = {
   name: "ping",
   description: "test cmd",
   // deleted: true,
-  devOnly: true,
+  // devOnly: true,
   testOnly: true,
   // ? option: Object[] - see docs for more info
 

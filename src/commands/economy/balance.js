@@ -25,6 +25,12 @@ module.exports = {
         },
       });
 
+      if (!user) {
+        return interaction.reply({
+          content: "User not found in database, have they registered?",
+        });
+      }
+
       return interaction.reply({
         content: `${user.username}'s balance is: :moneybag: $${user.balance}`,
       });

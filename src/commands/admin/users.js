@@ -13,11 +13,11 @@ module.exports = {
     const usersList = [];
 
     users.forEach((user) => {
-      usersList.push(`${user.id} - ${user.username}`);
+      usersList.push(`\`\`\`${user.lastDaily}\`\`\``);
     });
 
     interaction.reply({
-      content: `${usersList.join(", ")}`,
+      content: `${usersList.join(" ")}`,
     });
   },
 };

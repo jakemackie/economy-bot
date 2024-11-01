@@ -14,10 +14,9 @@ module.exports = {
     );
 
     if (userIds.includes(interaction.user.id)) {
-      interaction.reply({
+      return await interaction.reply({
         content: "You are already registered.",
       });
-      return;
     }
 
     await prisma.user.create({
@@ -28,7 +27,7 @@ module.exports = {
       },
     });
 
-    interaction.reply({
+    return await interaction.reply({
       content: "You have successfully registered.",
     });
   },

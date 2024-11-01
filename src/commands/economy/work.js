@@ -16,11 +16,17 @@ module.exports = {
     });
 
     // Check if user has worked in the last 24 hours
-    if (user.lastWorkedAt > new Date(Date.now() - 86400000)) {
-      return interaction.reply({
-        content: "You can only work once every 24 hours.",
-        ephemeral: true,
-      });
+    if (user.lastWorked != null) {
+      const canWorkAgain = user.lastWorked.getTime() + 86400000;
+
+      if (canWorkAgain > Date.now()) {
+        return interaction.reply({
+          content: `You can only work once every 24 hours. You can work again <t:${Math.floor(
+            canWorkAgain / 1000
+          )}:R>.`,
+          ephemeral: true,
+        });
+      }
     }
 
     await prisma.user.update({
@@ -29,7 +35,7 @@ module.exports = {
       },
       data: {
         balance: user.balance + 75,
-        lastWorkedAt: new Date(),
+        lastWorked: new Date(),
       },
     });
 
