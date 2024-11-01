@@ -50,6 +50,11 @@ module.exports = async (client, interaction) => {
       return;
     }
 
+    if (interaction.isAutocomplete()) {
+      const focusedValue = interaction.options.getFocused();
+      console.log(focusedValue);
+    }
+
     const userIds = (await prisma.user.findMany({ select: { id: true } })).map(
       (user) => user.id
     );

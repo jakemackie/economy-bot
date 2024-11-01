@@ -2,7 +2,7 @@ const prisma = require("../../../prisma/prisma.js");
 
 module.exports = {
   name: "delete",
-  description: `Delete the account you've registered.`,
+  description: "Delete the account you've registered.",
   // deleted: true,
   // devOnly: true,
   testOnly: true,

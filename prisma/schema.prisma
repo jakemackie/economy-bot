@@ -12,6 +12,15 @@ model User {
   username      String
   displayName   String
   balance       Int       @default(0)
+  inventory     String[]  @default([])
   lastWorked    DateTime?
   lastDaily     DateTime?
+}
+
+model Item {
+  id            String   @id @default(cuid())
+  name          String
+  description   String
+  price         Int
+  category      String
 }

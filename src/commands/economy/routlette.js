@@ -2,8 +2,8 @@ const { ApplicationCommandOptionType } = require("discord.js");
 const prisma = require("../../../prisma/prisma.js");
 
 module.exports = {
-  name: "coinflip",
-  description: "Put up a bet and flip a coin.",
+  name: "roulette",
+  description: "Put up a bet and spin the roulette wheel.",
   // deleted: true,
   // devOnly: true,
   testOnly: true,
@@ -15,26 +15,30 @@ module.exports = {
       required: true,
     },
     {
-      name: "side",
-      description: "The side you want to bet on.",
+      name: "color",
+      description: "The color you want to bet on.",
       type: ApplicationCommandOptionType.String,
       required: true,
       choices: [
         {
-          name: "Heads",
-          value: "heads",
+          name: "Red",
+          value: "red",
         },
         {
-          name: "Tails",
-          value: "tails",
+          name: "Black",
+          value: "black",
+        },
+        {
+          name: "Green",
+          value: "green",
         },
       ],
     },
   ],
 
   callback: async (client, interaction) => {
-    const side = interaction.options.getString("side");
     const bet = interaction.options.getNumber("bet");
+    const color = interaction.options.getString("color");
 
     if (bet < 1) {
       await interaction.reply({
@@ -58,12 +62,33 @@ module.exports = {
       return;
     }
 
-    await interaction.editReply(`You bet :moneybag: $${bet} on ${side}...`);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await interaction.editReply(`The roulette wheel is spinning...`);
+    await new Promise((resolve) => setTimeout(resolve, 5000));
 
-    const coin = Math.random() < 0.5 ? "heads" : "tails";
+    const colors = {
+      red: 0.4865,
+      black: 0.4865,
+      green: 0.027,
+    };
 
-    if (side === coin) {
+    const probabilities = {
+      red: colors.red,
+      black: colors.red + colors.black,
+      green: 1,
+    };
+
+    const rouletteBall = Math.random();
+    let rouletteColor;
+
+    if (rouletteBall < probabilities.red) {
+      rouletteColor = "red";
+    } else if (rouletteBall < probabilities.black) {
+      rouletteColor = "black";
+    } else {
+      rouletteColor = "green";
+    }
+
+    if (rouletteColor === color) {
       await prisma.user.update({
         where: {
           id: interaction.user.id,
@@ -75,9 +100,9 @@ module.exports = {
         },
       });
 
-      await interaction.editReply({
-        content: `🎉 You won! The coin landed on ${coin}. You earned :moneybag: $${bet}!`,
-      });
+      await interaction.editReply(
+        `The roulette ball landed on ${rouletteColor}! You won $${winnings}.`
+      );
     } else {
       await prisma.user.update({
         where: {
@@ -90,9 +115,9 @@ module.exports = {
         },
       });
 
-      await interaction.editReply({
-        content: `😢 You lost! The coin landed on ${coin}. You lost :moneybag: $${bet}.`,
-      });
+      await interaction.editReply(
+        `The roulette ball landed on ${rouletteColor}! You lost $${bet}.`
+      );
     }
   },
 };
