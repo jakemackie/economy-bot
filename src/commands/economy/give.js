@@ -26,6 +26,7 @@ module.exports = {
     if (amount < 1) {
       await interaction.reply({
         content: "You can't give less than a dollar.",
+        ephemeral: true,
       });
       return;
     }
@@ -33,6 +34,7 @@ module.exports = {
     if (targetUser.id === interaction.user.id) {
       await interaction.reply({
         content: "You can't give money to yourself.",
+        ephemeral: true,
       });
       return;
     }
@@ -48,6 +50,7 @@ module.exports = {
     if (user.balance < amount) {
       await interaction.editReply({
         content: "You don't have enough balance.",
+        ephemeral: true,
       });
       return;
     }
@@ -61,6 +64,7 @@ module.exports = {
     if (!target) {
       return await interaction.editReply({
         content: "User not found in database, have they registered?",
+        ephemeral: true,
       });
     }
 
@@ -83,7 +87,7 @@ module.exports = {
     });
 
     await interaction.editReply({
-      content: `You gave $${amount} to ${target.username}.`,
+      content: `You gave $${amount} to ${target.displayName}.`,
     });
   },
 };

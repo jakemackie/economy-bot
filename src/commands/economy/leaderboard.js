@@ -19,7 +19,7 @@ module.exports = {
       value: `${usersByBalance
         .map(
           (user, index) =>
-            `${index + 1}. ${user.username} - **$${user.balance}**`
+            `${index + 1}. ${user.displayName} - **$${user.balance}**`
         )
         .join("\n")}`,
     });

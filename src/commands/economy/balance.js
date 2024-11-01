@@ -28,11 +28,12 @@ module.exports = {
       if (!user) {
         return interaction.reply({
           content: "User not found in database, have they registered?",
+          ephemeral: true,
         });
       }
 
       return interaction.reply({
-        content: `${user.username}'s balance is: :moneybag: $${user.balance}`,
+        content: `${user.displayName}'s balance is: :moneybag: $${user.balance}`,
       });
     }
 
